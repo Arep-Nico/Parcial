@@ -6,8 +6,10 @@ import static spark.Spark.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Objects;
+import java.util.List;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * SparkWebApp
@@ -16,6 +18,7 @@ public class SparkWebApp {
 
     /**
      * Funcion principal del proyecto
+     * 
      * @param args argumentos de la clase
      */
     public static void main(String[] args) {
@@ -27,9 +30,7 @@ public class SparkWebApp {
 
     private static String list(Request req, Response res) {
 
-        System.out.println(req.body());
-
-        ArrayList<String> sList = new ArrayList<String>( Arrays.asList(req.body().split("\\s*,\\s*")) );
+        ArrayList<String> sList = new ArrayList<String>(Arrays.asList(req.body().split("\\s*,\\s*")));
         ArrayList<Double> dList = new ArrayList<>();
         for (String s : sList) {
             try {
@@ -41,22 +42,39 @@ public class SparkWebApp {
                 System.out.println("Not a number");
             }
         }
+        Double sum = calculator(dList);
+        mergeSort(dList, dList.size());
 
-        // mergeSort(dList, dList.size());
+        ResponseClass<Double> resp = new ResponseClass<Double>(sum, dList);
 
-        for (Double double1 : dList) {
-            System.out.println(double1);
+        ObjectMapper mapper = new ObjectMapper();
+        String jsonString = "";
+        try {
+            jsonString = mapper.writeValueAsString(resp);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
         }
         
-        return "hola";
+        return jsonString;
     }
 
-    private static <T extends Comparable<T>> void mergeSort(ArrayList<T> init, Integer n) {
-        if (init.size() < 2)
+    private static <T extends Comparable<T>> void mergeSort(List<T> init, Integer n) {
+
+        if (n < 2)
             return;
         int mid = n/2;
-        ArrayList<T> l = (ArrayList<T>) init.subList(0, mid);
-        ArrayList<T> r = (ArrayList<T>) init.subList(mid, n);
+
+        List<T> l = new ArrayList<T>();
+        List<T> r = new ArrayList<T>();
+
+        for (int i = 0; i < mid; i++) {
+            l.add(init.get(i));
+        }
+
+        for (int i = mid; i < n; i++) {
+            r.add(init.get(i));
+        }
+
 
         mergeSort(l, mid);
         mergeSort(r, n - mid);
@@ -64,13 +82,15 @@ public class SparkWebApp {
         merge(init, l, r, mid, n - mid);
     }
 
-    private static <T extends Comparable<T>> void merge(ArrayList<T> init, ArrayList<T> l, ArrayList<T> r, int left, int right) {
+    private static <T extends Comparable<T>> void merge(List<T> init, List<T> l, List<T> r, int left, int right) {
+
         int i = 0, j = 0, k = 0;
+
         while (i < left && j < right) {
             if (l.get(i).compareTo(r.get(j)) <= 0) {
                 init.set(k++, l.get(i++));
             } else {
-                init.set(k++, l.get(j++));
+                init.set(k++, r.get(j++));
             }
         }
 
@@ -80,6 +100,14 @@ public class SparkWebApp {
         while (j < right) {
             init.set(k++, r.get(j++));
         }
+    }
+
+    private static Double calculator(List<Double> init) {
+        Double res = 0.0;
+        for (Double t : init) {
+            res += t;
+        }
+        return res;
     }
 
     /**
