@@ -1,12 +1,8 @@
-# Laboratorio Http Server
+# Parcial
 
-Este laboratorio consiste en desarrollar un servidor http con java 
-
-[![Heroku](https://heroku-badge.herokuapp.com/?app=mighty-ocean-00668)](https://mighty-ocean-00668.herokuapp.com)
-[![CircleCI](https://circleci.com/gh/Arep-Nico/ClientServer/tree/master.svg?style=svg)](https://circleci.com/gh/Arep-Nico/ClientServer/tree/master)
+[![Heroku](https://heroku-badge.herokuapp.com/?app=obscure-beach-96504)](https://obscure-beach-96504.herokuapp.com/)
 [![Maven Central](https://img.shields.io/maven-central/v/org.apache.maven.plugins/maven-compiler-plugin/3.8.0)](https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin/3.8.0)
 [![Maven Central](https://img.shields.io/maven-central/v/org.apache.maven.plugins/maven-dependency-plugin/3.0.1)](https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-dependency-plugin/3.0.1)
-[![Maven Central](https://img.shields.io/maven-central/v/org.apache.maven.plugins/maven-javadoc-plugin)](https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-javadoc-plugin)
 
 ### Prerequisitos
 
@@ -14,7 +10,7 @@ Se requiere maven y Java version 8 como minimo.
 
 ## Diseño
 
-La documentacion del Api de **HttpServer** esta a continuacion [aqui](documents/Laboratorio_3_Arep.pdf).
+Esta api con Spark permite recibir una lista y retorna la lista ordenada y la sumatoria de sus elementos.
 
 ## Running
  Para empaquetar el proyecto de Java 
@@ -38,7 +34,7 @@ La documentacion del Api de **HttpServer** esta a continuacion [aqui](documents/
 
 ## Versionamiento
 
-Para ver las versiones disponible, mire [realese version](https://github.com/Arep-Nico/ClientServer/releases).
+Para ver las versiones disponible, mire [realese version](https://github.com/Arep-Nico/Parcial/releases).
 
 ## Autor
 
